@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Fuel
   - Black Hole
+  - Memory
   layers:
   - Default
   - TransparentFX
