@@ -18,6 +18,8 @@ public class PlayerMvmt : MonoBehaviour
 
     public float blackHoleMultiplier;
 
+    public GameManager gManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +65,11 @@ public class PlayerMvmt : MonoBehaviour
                 fuel += fuelContainerVal;
             }
             fuelBar.value = fuel;
+        }
+
+        if(collider.gameObject.tag == "Memory")
+        {
+            gManager.TriggerMemory();
         }
 
     }

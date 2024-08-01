@@ -83,6 +83,11 @@ public class Typewriter : MonoBehaviour
         instance.messages.Add(typeMsg);
     }
 
+    public static void Pop()
+    {
+        instance.messages.RemoveAt(0);
+    }
+
     public static void Activate()
     {
         instance.currentMsg = instance.messages[0];

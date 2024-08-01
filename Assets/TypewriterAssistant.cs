@@ -7,8 +7,8 @@ public class TypewriterAssistant : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Typewriter.Add("book of job or something idk");
+        /*Typewriter.Add("book of job or something idk");
 
-        Typewriter.Activate();
+        Typewriter.Activate();*/
     }
 }

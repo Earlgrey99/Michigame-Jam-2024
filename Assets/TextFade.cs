@@ -12,6 +12,10 @@ public class TextFade : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+    }
+
+    public void TriggerFade()
+    {
         StartCoroutine(Fade().GetEnumerator());
     }
 
@@ -29,5 +33,7 @@ public class TextFade : MonoBehaviour
             textMesh.color = new Color(1f, 1f, 1f, textMesh.color.a - (Time.deltaTime * fadeMultiplier));
             yield return new WaitForSeconds(Time.deltaTime);
         }
+        Typewriter.Pop();
+        this.gameObject.SetActive(false);
     }
 }
