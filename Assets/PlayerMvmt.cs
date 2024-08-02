@@ -49,6 +49,15 @@ public class PlayerMvmt : MonoBehaviour
             fuel -= (Time.deltaTime * fuelConsumption);
             fuelBar.value = fuel;
         }
+
+        if (fuel <= 0)
+        {
+            this.transform.position = new Vector3(0, 0, 0);
+            this.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            fuel = maxFuel;
+            fuelBar.value = fuel;
+            gManager.ResetGame();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collider) //check for collisions
