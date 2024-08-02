@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public float fadeMultiplier;
+    public GameObject panel;
+
     public GameObject popupText;
     public List<GameObject> memories;
     private List<string> memoryText = new List<string>
@@ -21,18 +25,25 @@ public class GameManager : MonoBehaviour
     //Start is called before the first frame update
     void Start()
     {
-        popupText.SetActive(false);
-        memoryIndex = 0;
-        foreach (GameObject memory in memories){
-            memory.SetActive(false);
-        }
-        memories[0].SetActive(true);
+        ResetGame();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void ResetGame()
+    {
+        StartCoroutine(FadeFromBlack().GetEnumerator());
+        popupText.SetActive(false);
+        memoryIndex = 0;
+        foreach (GameObject memory in memories)
+        {
+            memory.SetActive(false);
+        }
+        memories[0].SetActive(true);
     }
 
     public void TriggerMemory()
@@ -50,6 +61,17 @@ public class GameManager : MonoBehaviour
         else
         {
             //TODO: trigger ending
+        }
+    }
+
+    IEnumerable FadeFromBlack()
+    {
+        Image image = panel.GetComponent<Image>();
+        image.color = new Color(0f, 0f, 0f, 1f);
+        while (image.color.a > 0f)
+        {
+            image.color = new Color(0f, 0f, 0f, image.color.a - (Time.deltaTime * fadeMultiplier));
+            yield return new WaitForSeconds(Time.deltaTime);
         }
     }
 }
