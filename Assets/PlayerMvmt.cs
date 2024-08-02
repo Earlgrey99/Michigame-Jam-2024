@@ -20,11 +20,14 @@ public class PlayerMvmt : MonoBehaviour
 
     public GameManager gManager;
 
+    public GameObject engineAudio;
+
     // Start is called before the first frame update
     void Start()
     {
         fuel = maxFuel;
         fuelBar.value = maxFuel;
+        engineAudio.SetActive(false);
     }
 
     // Update is called once per frame
@@ -48,6 +51,11 @@ public class PlayerMvmt : MonoBehaviour
             this.GetComponent<Rigidbody2D>().velocity = direction * speed;
             fuel -= (Time.deltaTime * fuelConsumption);
             fuelBar.value = fuel;
+            engineAudio.SetActive(true);
+        }
+        else
+        {
+            engineAudio.SetActive(false);
         }
 
         if (fuel <= 0)
@@ -73,6 +81,7 @@ public class PlayerMvmt : MonoBehaviour
             {
                 fuel += fuelContainerVal;
             }
+            gManager.PlayRefuel();
             fuelBar.value = fuel;
         }
 

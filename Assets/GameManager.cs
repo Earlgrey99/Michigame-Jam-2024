@@ -6,6 +6,11 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public AudioSource source;
+    public AudioClip memoryGet;
+    public AudioClip refuel;
+    public AudioClip whoosh;
+
     public float fadeMultiplier;
     public GameObject panel;
 
@@ -44,6 +49,7 @@ public class GameManager : MonoBehaviour
             memory.SetActive(false);
         }
         memories[0].SetActive(true);
+        source.PlayOneShot(whoosh);
     }
 
     public void TriggerMemory()
@@ -57,11 +63,17 @@ public class GameManager : MonoBehaviour
             popupText.GetComponent<TextFade>().TriggerFade();
             Typewriter.Activate();
             memoryIndex++;
+            source.PlayOneShot(memoryGet);
         }
         else
         {
             //TODO: trigger ending
         }
+    }
+
+    public void PlayRefuel()
+    {
+        source.PlayOneShot(refuel);
     }
 
     IEnumerable FadeFromBlack()
