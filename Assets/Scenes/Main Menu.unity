@@ -882,7 +882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartGameButton: {fileID: 1816078868}
-  StartGameSceneName: SampleScene
+  StartGameSceneName: Intro
 --- !u!4 &1613238440
 Transform:
   m_ObjectHideFlags: 0

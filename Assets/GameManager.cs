@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -60,14 +61,14 @@ public class GameManager : MonoBehaviour
             memories[memoryIndex + 1].SetActive(true);
             popupText.SetActive(true);
             Typewriter.Add(memoryText[memoryIndex]);
-            popupText.GetComponent<TextFade>().TriggerFade();
+            popupText.GetComponent<TextFade>().TriggerFade(false, 1);
             Typewriter.Activate();
             memoryIndex++;
             source.PlayOneShot(memoryGet);
         }
         else
         {
-            //TODO: trigger ending
+            SceneManager.LoadScene("Ending");
         }
     }
 

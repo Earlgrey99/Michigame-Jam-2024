@@ -9,31 +9,56 @@ public class TextFade : MonoBehaviour
     public float duration;
     public TextMeshProUGUI textMesh;
 
+    public bool doneFading;
+
+    private Color blue = new Color(0.596f, 0.961f, 0.976f);
+    private Color red = new Color(0.945f, 0.384f, 0.388f);
+
     // Start is called before the first frame update
     void Start()
     {
     }
 
-    public void TriggerFade()
+    public void TriggerFade(bool isCutscene, int color)
     {
-        StartCoroutine(Fade().GetEnumerator());
+        StartCoroutine(Fade(isCutscene, color).GetEnumerator());
     }
 
-    IEnumerable Fade()
+    IEnumerable Fade(bool isCutscene, int color)
     {
-        textMesh.color = new Color(1f, 1f, 1f, 0f);
+        doneFading = false;
+        switch (color)
+        {
+            case 0:
+                textMesh.color = Color.white;
+                break;
+            case 1:
+                textMesh.color = blue;
+                break;
+            case 2:
+                textMesh.color = red;
+                break;
+            default:
+                textMesh.color = Color.white;
+                break;
+        }
+        textMesh.color = new Color(textMesh.color.r, textMesh.color.g, textMesh.color.b, 0f);
         while (textMesh.color.a < 1f)
         {
-            textMesh.color = new Color(1f, 1f, 1f, textMesh.color.a + (Time.deltaTime * fadeMultiplier));
+            textMesh.color = new Color(textMesh.color.r, textMesh.color.g, textMesh.color.b, textMesh.color.a + (Time.deltaTime * fadeMultiplier));
             yield return new WaitForSeconds(Time.deltaTime);
         }
         yield return new WaitForSeconds(duration);
         while (textMesh.color.a > 0f)
         {
-            textMesh.color = new Color(1f, 1f, 1f, textMesh.color.a - (Time.deltaTime * fadeMultiplier));
+            textMesh.color = new Color(textMesh.color.r, textMesh.color.g, textMesh.color.b, textMesh.color.a - (Time.deltaTime * fadeMultiplier));
             yield return new WaitForSeconds(Time.deltaTime);
         }
         Typewriter.Pop();
-        this.gameObject.SetActive(false);
+        doneFading = true;
+        if (!isCutscene)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 }
