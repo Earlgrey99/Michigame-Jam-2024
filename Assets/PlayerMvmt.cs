@@ -72,7 +72,7 @@ public class PlayerMvmt : MonoBehaviour
     {
         if(collider.gameObject.tag == "Fuel") //check if player collides with fuel container
         {
-            Destroy(collider.gameObject); //destroy fuel container
+            collider.gameObject.SetActive(false); //disable fuel container
             if (fuel + fuelContainerVal > maxFuel)
             {
                 fuel = maxFuel;

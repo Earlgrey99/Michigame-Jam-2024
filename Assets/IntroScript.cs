@@ -35,6 +35,14 @@ public class IntroScript : MonoBehaviour
         StartCoroutine(ShowIntroText().GetEnumerator());
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
+    }
+
     IEnumerable ShowIntroText()
     {
         for (int i = 0; i < texties.Count; i++)

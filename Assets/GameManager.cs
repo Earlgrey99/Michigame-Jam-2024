@@ -28,9 +28,12 @@ public class GameManager : MonoBehaviour
     };
     private int memoryIndex;
 
+    private GameObject[] fuelCannisters;
+
     //Start is called before the first frame update
     void Start()
     {
+        fuelCannisters = GameObject.FindGameObjectsWithTag("Fuel");
         ResetGame();
     }
 
@@ -51,6 +54,10 @@ public class GameManager : MonoBehaviour
         }
         memories[0].SetActive(true);
         source.PlayOneShot(whoosh);
+        foreach (GameObject g in fuelCannisters)
+        {
+            g.SetActive(true);
+        }
     }
 
     public void TriggerMemory()
